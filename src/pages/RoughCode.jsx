@@ -79,7 +79,7 @@ const Text = styled.h1`
 
 
 
-const Boxcolorchange = () => {
+const RoughCode = () => {
 
 const [color,setColor] = useState();
 const [count,setCount] = useState(0);
@@ -148,9 +148,9 @@ const boxcolor = (e) =>{
         <Flex color={color}><p style={{marginTop:'25px'}}>Color</p><Input type='input' color={color} onChange={boxcolor}/></Flex>
         <p style={{color:`${color}`}}>Enter Color in Input above</p>
         <p>{count}</p>
-        {/* <ReactHowler
+        <ReactHowler
         src={music}
-        playing={flag}/> */}
+        playing={flag}/>
         <Button onClick={GenrateQRCode}>Genrate QR-Code</Button>
         <a href={blob} download='qrcode.jpg'><Button style={{marginTop:'10px',marginBottom:'10px'}} onClick={DownloadQRCode}>Download QR-Code</Button></a>
         <Button onClick={play}>Play Music</Button>
@@ -159,4 +159,4 @@ const boxcolor = (e) =>{
     )
 }
 
-export default Boxcolorchange
+export default RoughCode
