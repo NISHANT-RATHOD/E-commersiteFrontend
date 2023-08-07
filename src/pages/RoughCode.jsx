@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactHowler from 'react-howler'
 import {useState , useEffect } from 'react'
-import music from '../audio/Naalayak-Zakir-Official-music-video-Hindi-Gaane.mp3'
+// import music from '../audio/Naalayak-Zakir-Official-music-video-Hindi-Gaane.mp3'
 import styled from 'styled-components'
 
 const Container = styled.div`
@@ -14,10 +14,12 @@ const Box = styled.div`
     height: 200px;
     width: 500px;
     justify-content: center;
+    padding:100px;
     /* border: 1px solid black; */
     margin-top: 50px ;
     background-color: ${props=>props.color};
     z-index: 2;
+    box-sizing: border-box;
 `
 const Small_Box = styled.div`
     height: 100px;
@@ -146,9 +148,9 @@ const boxcolor = (e) =>{
         <Flex color={color}><p style={{marginTop:'25px'}}>Color</p><Input type='input' color={color} onChange={boxcolor}/></Flex>
         <p style={{color:`${color}`}}>Enter Color in Input above</p>
         <p>{count}</p>
-        <ReactHowler
+        {/* <ReactHowler
         src={music}
-        playing={flag}/>
+        playing={flag}/> */}
         <Button onClick={GenrateQRCode}>Genrate QR-Code</Button>
         <a href={blob} download='qrcode.jpg'><Button style={{marginTop:'10px',marginBottom:'10px'}} onClick={DownloadQRCode}>Download QR-Code</Button></a>
         <Button onClick={play}>Play Music</Button>

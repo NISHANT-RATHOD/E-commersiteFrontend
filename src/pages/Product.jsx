@@ -29,7 +29,7 @@ const ImgContainer = styled.div`
 const Image = styled.img`
    width: 100%;
    height: 90vh;
-   object-fit: cover;
+   object-fit: contain;
    ${mobile({height:'40vh'})}
 `
 
@@ -51,6 +51,7 @@ const Desc = styled.p`
 const Price = styled.span`
    font-weight: 100;
    font-size: 40px;
+   
 `
 
 const FilterContainer = styled.div`
@@ -76,8 +77,13 @@ const FilterColor = styled.div`
      height: 20px;
      border-radius: 50%;
      background-color: ${props=>props.color};
+     border: 2px solid;
+     border-color:white;
      margin: 0 5px;
      cursor: pointer;
+     :hover{
+      border: 2px solid teal;
+     }
 `
 
 const FilterSize = styled.select`
@@ -133,11 +139,13 @@ const Product = () => {
     const id = location.pathname.split('/')[2];
     const [product,setProduct] = useState({});
     const [color,setColor] = useState([]);
+    const [price,setPrice] = useState();
+    const [constPrice,setConstPrice] = useState([]);
+    const [colour,setColour] = useState();
     const [quantity,setQuantity] = useState(1)
-    const [handlesize,setHandleSize] = useState({S:['S','M','L'],Size:'S'});
+    const [handlesize,setHandleSize] = useState({Sizes:['S','M','L'],Size:'S'});
     const dispatch = useDispatch()
-    const size = handlesize.Size
-
+    const size = handlesize.Size 
     const handleQuantity = (type)=>{ 
      if(type==="dec"){
       quantity > 1 && setQuantity(quantity - 1)
@@ -150,15 +158,17 @@ const Product = () => {
         const getProduct = async()=>{
            await publicRequest.get("/product/find/"+id)
            .then((req)=>{
-            setProduct(req.data)
-            setColor(req.data.color)
+            setProduct(req.data);
+            setColor(req.data.color);
+            setConstPrice(req.data.Price);
+            setPrice(req.data.price);
            })
         }
         getProduct();
     },[id])
-
+    
     const handleclick = ()=>{
-        dispatch({type:'AddProduct',payload:{...product,quantity,size}});
+        dispatch({type:'AddProduct',payload:{...product,price,quantity,size,colour}});
     }
 
     return (
@@ -174,18 +184,18 @@ const Product = () => {
                     <Desc>
                     {product.desc}
                     </Desc>
-                    <Price>$ {product.price}</Price>
+                    <Price>$ {price}</Price>
                     <FilterContainer>
                         <Filter>
-                            <FilterTitle>Color </FilterTitle>
+                            <FilterTitle>Color</FilterTitle>
                             {color.map((color)=>{
-                                return <FilterColor color={color}/> 
+                                return <FilterColor style={{borderColor:color=="white"?"teal":color==colour&&"teal"}} onClick={()=>{setColour(color)}} color={color}/> 
                             })}
                         </Filter>
                         <Filter>
                             <FilterTitle>Size</FilterTitle>
-                            <FilterSize onChange={(e)=>setHandleSize({...handlesize,Size:e.target.value})}>
-                             {handlesize.S.map((s)=>{
+                            <FilterSize onChange={(e)=>[setHandleSize({...handlesize,Size:e.target.value}),setPrice( e.target.value == "M" ? constPrice[1]:e.target.value == "L"? constPrice[2]:constPrice[0])]}>
+                             {handlesize.Sizes.map((s)=>{
                                  return<FilterSizeOption>{s}</FilterSizeOption>
                              })}   
                             </FilterSize>

@@ -5,7 +5,7 @@ import ProductList from './pages/ProductList';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Cart from './pages/Cart';
-import Boxcolorchange from './pages/Boxcolorchange';
+import RoughCode from './pages/RoughCode';
 import {BrowserRouter as Router,Routes,Route} from 'react-router-dom';
 import ScrollToTop from './Components/ScrolltoTop';
 

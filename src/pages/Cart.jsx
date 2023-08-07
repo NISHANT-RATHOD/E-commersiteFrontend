@@ -96,6 +96,8 @@ const ProductColor = styled.div`
    width: 20px;
    height: 20px;
    border-radius: 50%;
+   border:2px solid;
+   border-color:white;
    background-color: ${props => props.color};
 `
 
@@ -188,6 +190,7 @@ const RemoveButton = styled.button`
 
 const Cart = () => {
     const cart = useSelector(state=>state.cart);
+    console.log(cart);
     const dispatch =  useDispatch();
     const removeproduct = (e,p)=>{
        dispatch({type:"RemoveProduct",payload:{Id:e,price:p}})
@@ -214,7 +217,7 @@ const Cart = () => {
                                 <Details>
                                     <ProductName><b>Product:</b> {product.title}</ProductName>
                                     <ProductId><b>ID:</b> {product._id}</ProductId>
-                                    <ProductColor color={product.color} />
+                                    <ProductColor style={{borderColor:product.colour=="white"&&"teal"}} color={product.colour||product.color[0]} />
                                     <ProductSize><b>Size:</b> {product.size}</ProductSize>
                                 </Details>
                             </ProductDetail>
