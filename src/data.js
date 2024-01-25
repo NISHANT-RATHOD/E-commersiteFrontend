@@ -1,7 +1,7 @@
 export const sliderItems = [
     {
         id: 1,
-        img: "https://www.pngmart.com/files/1/Fashion-Girl-PNG-HD.png",
+        img: "https://drive.google.com/file/d/1CfRyZm-5OGMVowdBmLnPx4bNUrE-dRFo/view?usp=sharing",
         title: "SUMMER SALE",
         desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
         bg: "f5fafd",
